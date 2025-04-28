@@ -2,9 +2,15 @@
 
 ## 👋 Introduction
 
-This challenge is designed to evaluate your ability to implement a small **Python-based backend service** along with a **data processing script**. Your solution should demonstrate clean and maintainable code, while prioritizing **readability**, **simplicity**, and **clear thinking**.
+This challenge is designed to evaluate your ability to implement a small **Python-based backend service** along with a **data processing script**. 
+Your solution should demonstrate clean and maintainable code, while prioritizing **readability**, **simplicity**, and **clear thinking**.
 
 ---
+
+##  Goal of this challenge
+
+The goal is to prepare and normalize listing data from different online property platforms as a preprocessing step for finding matches across platforms.
+All platforms have different formats and data types, the goal is to unify the data into a common format.
 
 ## 📦 Task Overview
 
@@ -20,7 +26,7 @@ You're free to use any Python libraries or tools that help you achieve this, but
 ## 📂 Dataset
 
 The dataset you'll be working with is available on Google Drive:  
-👉 [Download the file here](<link>)
+👉 [Download the file here](<https://drive.google.com/file/d/1Yex5VDiyVVGAC5GpwEbrPFXxtzfHLmfp/view?usp=drive_link>)
 
 This file contains raw data that you’ll be normalizing in your solution. Each line in the file represents a real-estate listing JSON object.
 
@@ -44,27 +50,30 @@ This can be implemented as a simple script or CLI tool.
 
 Build a **REST API** that:
 - Accepts one or more JSON records via `POST`.
-- Returns normalized records in the response.
+- Returns normalized records in the response. Normalization means transforming categorical data into one of N categories, 
+and numerical data into a common scale and for text data to be lowercase, trimmed and removed of special characters.
 
 Focus on normalizing the following fields:
 - `price`
 - `floor`
-- `rooms`
 - `living_space`
-- `propertyCategory`
+- `propertyCategory` - this should be a categorical variable from the list: apartment, house, ground, commercial and other
+- `title`
+- `street`
 
 If you believe other fields should be normalized, feel free to include them. Explain your reasoning in the documentation.
 
-You can use external libraries or a database if needed — just document your choices.
+You can use external libraries or a database if needed.
 
 ---
 
 ## 🛠 Project Guidelines
 
+- Be pragmatic because this is the test assignment, but be prepared to explain how would you scale and make changes for production environment
 - Include a `Dockerfile` to build the project
 - Provide a `docker-compose.yml` file for local testing (optional but nice to have)
 - Document any assumptions, TODOs, and decisions in this README or a separate doc
-- You have **5–8 hours** to work on this. If you can’t finish, include notes on how you would proceed.
+- We advise you to work **5–8 hours** on this. If you can’t finish, include notes on how you would proceed.
 
 ---
 
