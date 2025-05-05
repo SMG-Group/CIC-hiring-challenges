@@ -48,22 +48,39 @@ This can be implemented as a simple script or CLI tool.
 
 ### 2. 🌐 Service
 
-Build a **REST API** that:
-- Accepts one or more JSON records via `POST`.
-- Returns normalized records in the response. Normalization means transforming categorical data into one of N categories, 
-and numerical data into a common scale and for text data to be lowercase, trimmed and removed of special characters.
+Build a **REST API** that accepts one or more JSON records via `POST`. Then it:
+- Performs **Normalization**:
+  - Normalize the following fields: `price`, `floor`, `living_space`, `propertyCategory` (apartment, house, ground, commercial, other), `title`, `street`. Focus on transforming data into consistent formats suitable for both backfilling to and SMG platform (prio 1) as well as ML (prio 2) (e.g., numerical scaling, categorical encoding strategies, text cleaning).
+  - Crucially, reflect on and document any assumptions or strategies for handling potential outliers or missing values encountered in these fields.
+- Performs **Feature Engineering**:
+  - Based on the available fields in the raw data, identify and implement the calculation of at least **1-2 new features** you believe would be valuable for an ML-based property matching model. Examples could e.g. include price per square meter, text length features.
+  - Be ready to explain why you chose these features in your documentation.
+- Returns the processed records in the response, including both the normalized original fields and the newly engineered features.
 
-Focus on normalizing the following fields:
+Please focus on normalizing the following fields:
 - `price`
 - `floor`
 - `living_space`
-- `propertyCategory` - this should be a categorical variable from the list: apartment, house, ground, commercial and other
+- `propertyCategory` - (apartment, house, ground, commercial and other)
 - `title`
 - `street`
 
-If you believe other fields should be normalized, feel free to include them. Explain your reasoning in the documentation.
+---
 
-You can use external libraries or a database if needed.
+If you believe other fields should be normalized, feel free to include them, or mention how/why you would include them. Explain your reasoning in the documentation.
+
+In addition to documenting your setup, assumptions, and code structure, please include a dedicated **DATA ANALYSIS** section in your README documentation, addressing the following ML-related points:
+
+#### Data Analysis & Handling:
+- Briefly describe the characteristics of the key input fields (e.g., distributions, presence of outliers, missing data).
+- Detail your strategy for handling outliers and missing values during normalization, considering the potential impact on a downstream matching task.
+
+#### Feature Engineering:
+- Explain the rationale for the specific feature(s) you engineered. Why are they potentially useful for matching?
+
+#### ML Matching Strategy:
+- **Other Crucial Fields:** What other data fields (beyond those in the provided dataset, assuming a typical property listing) do you think are most crucial for building a highly effective ML-based matching model, and why?
+- **Proposed ML Approach:** Briefly outline one or two ML approaches you would consider for the matching task itself. 
 
 ---
 
@@ -73,17 +90,19 @@ You can use external libraries or a database if needed.
 - Include a `Dockerfile` to build the project
 - Provide a `docker-compose.yml` file for local testing (optional but nice to have)
 - Document any assumptions, TODOs, and decisions in this README or a separate doc
-- We advise you to work **5–8 hours** on this. If you can’t finish, include notes on how you would proceed.
+- We advise you to work **6–8 hours** on this. If you can’t finish, include notes on how you would proceed.
 
 ---
 
 ## 🧪 Evaluation Criteria
 
-We’re looking for:
+We're looking for:
 
 - Ability to break down business requirements into working code
 - The project builds and runs with one command
 - Clean code and sound architecture
+- **Quality of data analysis and strategy for handling outliers/missing data**
+- **Clarity, feasibility, and depth of thought in the DOCUMENTATION and DATA ANALYSIS section**
 - Proper use of framework and language idioms
 - Smart usage of external libraries and tools
 - Reasonable trade-offs and decision-making
